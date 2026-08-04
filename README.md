@@ -1,5 +1,7 @@
 # skala-vue
 
+[배포 페이지](https://margielaparis.github.io/skala-vue/)
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
