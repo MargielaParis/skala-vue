@@ -1,0 +1,26 @@
+<script setup>
+import { ref } from 'vue'
+
+const text1 = ref('')
+const text2 = ref('')
+
+const updateText2 = (event) => {
+  text2.value = event.target.value
+}
+</script>
+
+<template>
+  <div class="practice-section">
+    <h2>v-model 양방향 데이터 바인딩</h2>
+    <h3>1) v-model 축약 문법 (양방향)</h3>
+    <input v-model="text1" type="text" placeholder="여기에 입력하세요" />
+    <p>
+      입력된 값: <strong>{{ text1 }}</strong>
+    </p>
+    <h3>2) v-model의 내부 작동 원리 (단방향 + 이벤트)</h3>
+    <input :value="text2" type="text" placeholder="원리 파악용 입력창" @input="updateText2" />
+    <p>
+      입력된 값: <strong>{{ text2 }}</strong>
+    </p>
+  </div>
+</template>

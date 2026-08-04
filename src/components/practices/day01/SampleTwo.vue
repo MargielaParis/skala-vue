@@ -1,6 +1,7 @@
 <script setup>
-const welcomeMessage = 'Text Interpolation Pracitce'
+const welcomeMessage = 'Welcome to Skala-Vue'
 </script>
+
 <template>
   <div class="practice-section">
     <h2>{{ welcomeMessage }}</h2>

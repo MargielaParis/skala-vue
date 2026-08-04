@@ -1,0 +1,37 @@
+<script setup>
+import ComputedEx from './components/practice/day02/ComputedEx.vue'
+import ReactiveEx from './components/practice/day02/ReactiveEx.vue'
+import RefEx from './components/practice/day02/RefEx.vue'
+import WatchDeepEx from './components/practice/day02/WatchDeepEx.vue'
+import WatchEffectEx from './components/practice/day02/WatchEffectEx.vue'
+import WatchEx from './components/practice/day02/WatchEx.vue'
+import WatchMultiEx from './components/practice/day02/WatchMultiEx.vue'
+import WatchReactiveEx from './components/practice/day02/WatchReactiveEx.vue'
+import WeatherComposition from './components/practice/day02/WeatherComposition.vue'
+</script>
+
+<template>
+  <main class="practice-container">
+    <h1>3. Composition API</h1>
+    <hr />
+    <RefEx />
+    <ReactiveEx />
+
+    <h1>Computed & Watchers</h1>
+    <hr />
+    <ComputedEx />
+    <WatchEx />
+    <WatchMultiEx />
+    <WatchDeepEx />
+    <WatchReactiveEx />
+    <WatchEffectEx />
+
+    <h1>날씨 Mockup 과제</h1>
+    <hr />
+    <WeatherComposition />
+  </main>
+</template>
+
+<style>
+@import './components/practice/day02/practice.css';
+</style>

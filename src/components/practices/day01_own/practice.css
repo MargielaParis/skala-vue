@@ -1,0 +1,95 @@
+#app {
+  display: block;
+  width: 100%;
+  max-width: none;
+  padding: 2rem;
+}
+
+.practice-container {
+  width: min(100%, 900px);
+  margin: 0 auto;
+  color: #2c3e50;
+}
+
+.practice-container > h1 {
+  margin-top: 40px;
+  margin-bottom: 8px;
+  color: #1a252f;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.practice-container > h1:first-child {
+  margin-top: 0;
+}
+
+.practice-container > hr {
+  height: 3px;
+  margin-bottom: 14px;
+  background: linear-gradient(to right, #42b883, #35495e);
+  border: 0;
+  border-radius: 2px;
+}
+
+.practice-section {
+  padding: 16px 20px 20px;
+  margin-bottom: 24px;
+  background-color: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+}
+
+.practice-section h2 {
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+  color: #34495e;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.practice-section h3 {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.practice-container button:not(.btn-external) {
+  padding: 6px 14px;
+  margin: 2px;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #f1f3f5;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.practice-container button:not(.btn-external):not(:disabled):hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.practice-container button:not(.btn-external):disabled {
+  color: #adb5bd;
+  cursor: not-allowed;
+  background-color: #f8f9fa;
+  border-color: #e9ecef;
+}
+
+.practice-container input,
+.practice-container textarea,
+.practice-container select {
+  padding: 6px 10px;
+  color: #2c3e50;
+  font-size: 14px;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.practice-container label + label {
+  margin-left: 12px;
+}
