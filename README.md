@@ -1,6 +1,9 @@
 # skala-vue
 
 [배포 페이지](https://margielaparis.github.io/skala-vue/)
+- 해당 repo 내에는 api 키가 포함되어 있지 않아 날씨 호출 불가능 (401 error)
+- 원할 시, .env.local 파일 생성 후, VITE_OPENWEATHER_API_KEY=[OpenWeather API] 작성
+- https://openweathermap.org/
 
 This template should help get you started developing with Vue 3 in Vite.
 
