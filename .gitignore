@@ -14,6 +14,13 @@ dist-ssr
 coverage
 *.local
 
+# Environment variables
+.env
+.env.*
+!.env.example
+!.env.staging
+!.env.production
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -27,6 +34,9 @@ coverage
 *.tsbuildinfo
 
 .eslintcache
+
+# Local recoverable trash
+/.trash/
 
 # Cypress
 /cypress/videos/

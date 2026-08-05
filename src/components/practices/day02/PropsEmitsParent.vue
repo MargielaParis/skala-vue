@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import propsEmitsChild from './propsEmitsChild.vue'
+import PropsEmitsChild from './PropsEmitsChild.vue'
 
 const message = ref('Parent 초기 메시지')
 const handleUpdateRequest = (newMessage) => {
@@ -17,7 +17,7 @@ const handleUpdateRequest = (newMessage) => {
         Props 데이터: <strong>{{ message }}</strong>
       </p>
       <br />
-      <propsEmitsChild :parent-data="message" @update-request="handleUpdateRequest" />
+      <PropsEmitsChild :parent-data="message" @update-request="handleUpdateRequest" />
     </div>
   </div>
 </template>

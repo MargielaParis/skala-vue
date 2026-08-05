@@ -6,6 +6,14 @@ const handleLink = () => {
 const handleBox = () => {
   window.alert('부모 박스가 클릭되었습니다!')
 }
+
+const handleChildBubble = () => {
+  window.alert('1번 자식 클릭!')
+}
+
+const handleChildStop = () => {
+  window.alert('2번 자식(나만 켜짐) 클릭!')
+}
 </script>
 
 <template>
@@ -17,8 +25,8 @@ const handleBox = () => {
     <h3>2) .stop (이벤트 버블링 막기)</h3>
     <div class="event-box" @click="handleBox">
       <p>부모 영역 (클릭 시 alert 발동)</p>
-      <button @click="window.alert('1번 자식 클릭!')">버블링 발생 버튼</button>
-      <button @click.stop="window.alert('2번 자식(나만 켜짐) 클릭!')">버블링 차단 버튼</button>
+      <button @click="handleChildBubble">버블링 발생 버튼</button>
+      <button @click.stop="handleChildStop">버블링 차단 버튼</button>
     </div>
   </div>
 </template>

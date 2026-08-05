@@ -23,4 +23,8 @@ const isVisible = ref(true)
   background-color: #3498db;
   border-radius: 5px;
 }
+
+.box p {
+  color: inherit;
+}
 </style>

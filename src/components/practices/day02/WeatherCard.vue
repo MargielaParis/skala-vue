@@ -126,9 +126,10 @@ const airGrade = (type, value) => {
   margin-bottom: 10px;
   color: #1e3147;
   cursor: pointer;
-  background: #fff;
-  border: 2px solid #dfe9eb;
-  border-radius: 12px;
+  background: var(--sky-surface-strong);
+  border: 1px solid var(--sky-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgb(31 75 99 / 8%);
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
@@ -144,25 +145,25 @@ const airGrade = (type, value) => {
 }
 
 .weather-card.weather-hot {
-  background: linear-gradient(135deg, #fff3dc, #ffe6df);
+  background: linear-gradient(135deg, rgb(255 243 220 / 88%), rgb(255 230 223 / 78%));
 }
 .weather-card.weather-clear {
-  background: linear-gradient(135deg, #fffce6, #eaf8ff);
+  background: linear-gradient(135deg, rgb(255 252 230 / 88%), rgb(234 248 255 / 78%));
 }
 .weather-card.weather-cloud {
-  background: linear-gradient(135deg, #f5f7f8, #e5edf1);
+  background: linear-gradient(135deg, rgb(245 247 248 / 86%), rgb(229 237 241 / 76%));
 }
 .weather-card.weather-rain {
-  background: linear-gradient(135deg, #eaf5fc, #e0eaf3);
+  background: linear-gradient(135deg, rgb(234 245 252 / 86%), rgb(224 234 243 / 76%));
 }
 .weather-card.weather-snow {
-  background: linear-gradient(135deg, #fbfeff, #e7f6fa);
+  background: linear-gradient(135deg, rgb(251 254 255 / 88%), rgb(231 246 250 / 78%));
 }
 .weather-card.weather-fog {
-  background: linear-gradient(135deg, #f5f5f2, #e6eae7);
+  background: linear-gradient(135deg, rgb(245 245 242 / 86%), rgb(230 234 231 / 76%));
 }
 .weather-card.weather-unavailable {
-  background: #f1f3f4;
+  background: rgb(241 243 244 / 82%);
 }
 
 .card-heading {
@@ -280,11 +281,26 @@ const airGrade = (type, value) => {
   font-weight: 800;
   border-radius: 999px;
 }
-.air-good { color: #1769aa; background: #e0f1ff; }
-.air-normal { color: #187553; background: #dcf4e8; }
-.air-bad { color: #b46100; background: #fff0d5; }
-.air-very-bad { color: #b42318; background: #ffe4e1; }
-.air-unknown { color: #687b8e; background: #edf1f3; }
+.air-good {
+  color: #1769aa;
+  background: #e0f1ff;
+}
+.air-normal {
+  color: #187553;
+  background: #dcf4e8;
+}
+.air-bad {
+  color: #b46100;
+  background: #fff0d5;
+}
+.air-very-bad {
+  color: #b42318;
+  background: #ffe4e1;
+}
+.air-unknown {
+  color: #687b8e;
+  background: #edf1f3;
+}
 .sun-time strong {
   font-size: 16px;
 }

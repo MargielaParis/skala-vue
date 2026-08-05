@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import LifecycleChild from './lifeCycleChild.vue'
+import LifecycleChild from './LifecycleChild.vue'
 
 const isShow = ref(true)
 </script>

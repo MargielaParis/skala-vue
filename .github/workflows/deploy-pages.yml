@@ -31,8 +31,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Lint
+        run: npm run lint
+
+      - name: Verify API configuration
+        env:
+          VITE_OPENWEATHER_API_KEY: ${{ secrets.VITE_OPENWEATHER_API_KEY }}
+        run: test -n "$VITE_OPENWEATHER_API_KEY"
+
       - name: Build
-        run: npm run build
+        env:
+          VITE_OPENWEATHER_API_KEY: ${{ secrets.VITE_OPENWEATHER_API_KEY }}
+        run: npm run build:production
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

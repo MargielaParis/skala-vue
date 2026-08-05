@@ -3,8 +3,10 @@ import axios from 'axios'
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useConfigStore } from '../../../stores/configStore'
+import { useCounterStore } from '../../../stores/counter'
 
 const configStore = useConfigStore()
+const counterStore = useCounterStore()
 const emit = defineEmits(['go-home'])
 defineProps({
   example: { type: String, default: 'router' },
@@ -51,6 +53,63 @@ const loadWeather = async () => {
     loading.value = false
   }
 }
+
+const JSON_BASE_URL = 'https://jsonplaceholder.typicode.com/posts'
+const posts = ref([])
+const postTitle = ref('')
+const jsonLoading = ref(false)
+const jsonLog = ref('버튼을 눌러 REST API CRUD를 확인하세요.')
+
+const runJsonRequest = async (label, request) => {
+  jsonLoading.value = true
+  try {
+    const result = await request()
+    jsonLog.value = `${label} 성공 · ${result}`
+  } catch (error) {
+    jsonLog.value = `${label} 실패 · ${error.message}`
+  } finally {
+    jsonLoading.value = false
+  }
+}
+
+const handleRead = () =>
+  runJsonRequest('GET', async () => {
+    const { data } = await axios.get(JSON_BASE_URL, { params: { _limit: 3 } })
+    posts.value = data
+    return `${data.length}건 조회`
+  })
+
+const handleCreate = () => {
+  if (!postTitle.value.trim()) return
+  return runJsonRequest('POST', async () => {
+    const { data } = await axios.post(JSON_BASE_URL, {
+      title: postTitle.value,
+      body: '샘플 내용',
+      userId: 1,
+    })
+    posts.value = [data, ...posts.value]
+    postTitle.value = ''
+    return `id ${data.id} 생성`
+  })
+}
+
+const handleUpdate = (id) =>
+  runJsonRequest('PUT', async () => {
+    const { data } = await axios.put(`${JSON_BASE_URL}/${id}`, {
+      title: '✨ 수정된 타이틀',
+      body: '수정 완료',
+      userId: 1,
+    })
+    posts.value = posts.value.map((post) => (post.id === id ? { ...post, ...data } : post))
+    return `id ${id} 수정`
+  })
+
+const handleDelete = (id) =>
+  runJsonRequest('DELETE', async () => {
+    const { status } = await axios.delete(`${JSON_BASE_URL}/${id}`)
+    posts.value = posts.value.filter((post) => post.id !== id)
+    return `id ${id} 삭제 (status ${status})`
+  })
 </script>
 
 <template>
@@ -66,6 +125,36 @@ const loadWeather = async () => {
         현재 단위: <strong>{{ configStore.unitSymbol }}</strong>
       </p>
       <button @click="configStore.toggleUnit">℃ / ℉ 전환</button>
+    </article>
+    <article v-else-if="example === 'counter'" class="lesson-card">
+      <h2>Counter Store</h2>
+      <p>
+        원본 카운트(state): <strong>{{ counterStore.count }}</strong> / 2배 연산(getters):
+        <strong>{{ counterStore.doubleCount }}</strong>
+      </p>
+      <button @click="counterStore.increment">숫자 1 증가 (actions)</button>
+      <button @click="counterStore.reset">초기화</button>
+    </article>
+    <article v-else-if="example === 'json'" class="lesson-card">
+      <h2>Axios · JSONPlaceholder CRUD</h2>
+      <p>{{ jsonLog }}</p>
+      <div class="json-input">
+        <input v-model="postTitle" placeholder="저장할 텍스트를 입력하세요" />
+        <button :disabled="jsonLoading" @click="handleCreate">POST</button>
+        <button :disabled="jsonLoading" @click="handleRead">GET</button>
+      </div>
+      <ul class="json-list">
+        <li v-for="post in posts" :key="post.id">
+          <div>
+            <span>ID {{ post.id }}</span>
+            <p>{{ post.title }}</p>
+          </div>
+          <div class="json-actions">
+            <button :disabled="jsonLoading" @click="handleUpdate(post.id)">PUT</button>
+            <button :disabled="jsonLoading" @click="handleDelete(post.id)">DELETE</button>
+          </div>
+        </li>
+      </ul>
     </article>
     <article v-else class="lesson-card weather-card">
       <div>
@@ -90,26 +179,8 @@ const loadWeather = async () => {
 .lesson-page {
   color: #1e3147;
 }
-.lesson-page > header p {
-  margin: 0;
-  color: #148476;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-}
-.lesson-page > header h1 {
-  margin: 4px 0;
-  font-size: clamp(28px, 4vw, 42px);
-}
-.lesson-page > header span,
-p {
+.lesson-card p {
   color: #687b8e;
-}
-.lesson-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin: 28px 0 16px;
 }
 .lesson-card {
   padding: 22px;
@@ -150,6 +221,50 @@ input {
 }
 .error {
   color: #c23b32;
+}
+.json-input {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.json-input input {
+  flex: 1;
+  min-width: 0;
+}
+.json-list {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.json-list li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #f3f8f7;
+  border: 1px solid #dfe9eb;
+  border-radius: 10px;
+}
+.json-list span {
+  color: #148476;
+  font-size: 11px;
+  font-weight: 800;
+}
+.json-list p {
+  margin: 2px 0 0;
+  font-size: 13px;
+}
+.json-actions {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.json-actions button {
+  padding: 6px 9px;
+  font-size: 12px;
 }
 @media (max-width: 760px) {
   .weather-card {

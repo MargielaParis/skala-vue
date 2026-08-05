@@ -18,7 +18,7 @@ const router = createRouter({
       path: '/assignment',
       alias: '/weather',
       name: 'weather-home',
-      component: () => import('../views/AssignmentView.vue'),
+      component: () => import('../views/WeatherHomeView.vue'),
     },
     {
       path: '/weather/about',

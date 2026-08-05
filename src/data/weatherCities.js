@@ -1,3 +1,60 @@
-export const weatherCities = []
+export const weatherCities = [
+  {
+    id: 'seoul',
+    name: '서울특별시',
+    provinceId: 'seoul',
+    provinceName: '서울특별시',
+    latitude: 37.5665,
+    longitude: 126.978,
+  },
+  {
+    id: 'busan',
+    name: '부산광역시',
+    provinceId: 'busan',
+    provinceName: '부산광역시',
+    latitude: 35.1796,
+    longitude: 129.0756,
+  },
+  {
+    id: 'daegu',
+    name: '대구광역시',
+    provinceId: 'daegu',
+    provinceName: '대구광역시',
+    latitude: 35.8714,
+    longitude: 128.6014,
+  },
+  {
+    id: 'incheon',
+    name: '인천광역시',
+    provinceId: 'incheon',
+    provinceName: '인천광역시',
+    latitude: 37.4563,
+    longitude: 126.7052,
+  },
+  {
+    id: 'gwangju',
+    name: '광주광역시',
+    provinceId: 'gwangju',
+    provinceName: '광주광역시',
+    latitude: 35.1595,
+    longitude: 126.8526,
+  },
+  {
+    id: 'daejeon',
+    name: '대전광역시',
+    provinceId: 'daejeon',
+    provinceName: '대전광역시',
+    latitude: 36.3504,
+    longitude: 127.3845,
+  },
+  {
+    id: 'ulsan',
+    name: '울산광역시',
+    provinceId: 'ulsan',
+    provinceName: '울산광역시',
+    latitude: 35.5384,
+    longitude: 129.3114,
+  },
+]
 
 export const findWeatherCity = (cityId) => weatherCities.find((city) => city.id === cityId)

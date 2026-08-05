@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
-import Day03Page from './forPage/day03/Day03Page.vue'
-import Day04Page from './forPage/day04/Day04Page.vue'
+import Day03Page from './practices/day03/Day03Page.vue'
+import Day04Page from './practices/day04/Day04Page.vue'
 import EventBasic from './practices/day01/EventBasic.vue'
 import EventModifier from './practices/day01/EventModifier.vue'
 import EventObject from './practices/day01/EventObject.vue'
@@ -33,11 +33,13 @@ import WatchEffectEx from './practices/day02/WatchEffectEx.vue'
 import WatchEx from './practices/day02/WatchEx.vue'
 import WatchMultiEx from './practices/day02/WatchMultiEx.vue'
 import WatchReactiveEx from './practices/day02/WatchReactiveEx.vue'
-import LifecycleParent from './practices/day02_own/lifeCycleParent.vue'
-import PropsEmitsParent from './practices/day02_own/propsEmitsParent.vue'
-import SlotDefaultParent from './practices/day02_own/slotDefaultParent.vue'
-import SlotNameParent from './practices/day02_own/slotNameParent.vue'
-import SlotScopedParent from './practices/day02_own/slotScopedParent.vue'
+import WatchRefArrayEx from './practices/day02/WatchRefArrayEx.vue'
+import WatchReactiveArrayEx from './practices/day02/WatchReactiveArrayEx.vue'
+import LifecycleParent from './practices/day02/LifecycleParent.vue'
+import PropsEmitsParent from './practices/day02/PropsEmitsParent.vue'
+import SlotDefaultParent from './practices/day02/SlotDefaultParent.vue'
+import SlotNamedParent from './practices/day02/SlotNamedParent.vue'
+import SlotScopedParent from './practices/day02/SlotScopedParent.vue'
 
 const lessons = [
   {
@@ -82,11 +84,13 @@ const lessons = [
       { id: 'multi-watch', label: 'Multi Watch', component: WatchMultiEx },
       { id: 'deep-watch', label: 'Deep Watch', component: WatchDeepEx },
       { id: 'reactive-watch', label: 'reactive Watch', component: WatchReactiveEx },
+      { id: 'ref-array-watch', label: 'ref 배열 Watch', component: WatchRefArrayEx },
+      { id: 'reactive-array-watch', label: 'reactive 배열 Watch', component: WatchReactiveArrayEx },
       { id: 'watch-effect', label: 'watchEffect()', component: WatchEffectEx },
       { id: 'lifecycle', label: 'Lifecycle', component: LifecycleParent },
       { id: 'props-emits', label: 'Props & Emits', component: PropsEmitsParent },
       { id: 'default-slot', label: 'Default Slot', component: SlotDefaultParent },
-      { id: 'named-slot', label: 'Named Slot', component: SlotNameParent },
+      { id: 'named-slot', label: 'Named Slot', component: SlotNamedParent },
       { id: 'scoped-slot', label: 'Scoped Slot', component: SlotScopedParent },
     ],
   },
@@ -97,7 +101,14 @@ const lessons = [
     examples: [
       { id: 'router', label: 'Vue Router', component: Day03Page, props: { example: 'router' } },
       { id: 'pinia', label: 'Pinia Store', component: Day03Page, props: { example: 'pinia' } },
+      {
+        id: 'counter',
+        label: 'Counter Store',
+        component: Day03Page,
+        props: { example: 'counter' },
+      },
       { id: 'axios', label: 'Axios Weather', component: Day03Page, props: { example: 'axios' } },
+      { id: 'json', label: 'Axios CRUD', component: Day03Page, props: { example: 'json' } },
     ],
   },
   {
@@ -113,6 +124,7 @@ const lessons = [
         props: { example: 'product' },
       },
       { id: 'async', label: 'Async Progress', component: Day04Page, props: { example: 'async' } },
+      { id: 'ecma', label: 'Modern JS 과제', component: Day04Page, props: { example: 'ecma' } },
       { id: 'confirm', label: 'Build 점검', component: Day04Page, props: { example: 'confirm' } },
     ],
   },
@@ -192,6 +204,14 @@ const selectLesson = (lesson) => {
   font-weight: 800;
   letter-spacing: 0.1em;
 }
+.page-heading {
+  padding: 22px 26px;
+  background: var(--sky-surface);
+  border: 1px solid var(--sky-border);
+  border-radius: 22px;
+  box-shadow: var(--sky-shadow);
+  backdrop-filter: var(--sky-backdrop);
+}
 .page-heading h1 {
   margin: 4px 0;
   font-size: clamp(30px, 4vw, 44px);
@@ -211,9 +231,11 @@ const selectLesson = (lesson) => {
   gap: 5px;
   height: max-content;
   padding: 14px;
-  background: #f0f6f5;
-  border: 1px solid #dbe9e6;
-  border-radius: 16px;
+  background: var(--sky-surface);
+  border: 1px solid var(--sky-border);
+  border-radius: 18px;
+  box-shadow: var(--sky-shadow-soft);
+  backdrop-filter: var(--sky-backdrop);
 }
 .practice-sidebar > p {
   margin: 6px 7px;
@@ -236,7 +258,7 @@ const selectLesson = (lesson) => {
 }
 .practice-sidebar button.active {
   color: #075f55;
-  background: #dff4ed;
+  background: rgb(217 241 244 / 82%);
 }
 .practice-sidebar small {
   font-size: 11px;
@@ -253,15 +275,15 @@ const selectLesson = (lesson) => {
 .practice-sidebar .example-link.selected {
   color: #075f55;
   font-weight: 800;
-  background: #fff;
+  background: rgb(255 255 255 / 78%);
 }
 .current-example {
   margin-bottom: 12px;
 }
 .example-stage {
-  --example-surface: #fff;
-  --example-surface-muted: #f3f8f7;
-  --example-border: #dfe9eb;
+  --example-surface: var(--sky-surface-strong);
+  --example-surface-muted: var(--sky-surface-soft);
+  --example-border: var(--sky-border);
   --example-text: #1e3147;
   --example-subtext: #64798c;
   color: var(--example-text);
@@ -273,7 +295,8 @@ const selectLesson = (lesson) => {
   background: var(--example-surface);
   border: 1px solid var(--example-border);
   border-radius: 16px;
-  box-shadow: 0 10px 24px rgb(32 68 83 / 8%);
+  box-shadow: var(--sky-shadow-soft);
+  backdrop-filter: var(--sky-backdrop);
 }
 .example-stage :deep(.practice-section),
 .example-stage :deep(.lesson-card) {
@@ -286,10 +309,8 @@ const selectLesson = (lesson) => {
 .example-stage :deep(.el-card__header) {
   color: var(--example-text);
 }
-.example-stage :deep(.practice-section p),
-.example-stage :deep(.practice-section label),
-.example-stage :deep(.lesson-card p),
-.example-stage :deep(.lesson-card label) {
+/* 예제가 자체 색을 지정하면 그쪽이 이기도록 특정도 0으로 낮춘 기본값 */
+:where(.example-stage) :deep(:where(.practice-section, .lesson-card) :where(p, label)) {
   color: var(--example-subtext);
 }
 .example-stage :deep(.monitor),

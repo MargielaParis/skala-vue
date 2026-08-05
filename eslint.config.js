@@ -21,10 +21,27 @@ export default defineConfig([
     },
   },
 
+  {
+    files: ['eslint.config.js', 'vite.config.js'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+
   js.configs.recommended,
   ...pluginVue.configs['flat/essential'],
 
   ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
+
+  {
+    name: 'app/custom-rules',
+    rules: {
+      eqeqeq: ['error', 'always'],
+      'no-console': 'off',
+    },
+  },
 
   skipFormatting,
 ])

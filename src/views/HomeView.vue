@@ -67,15 +67,32 @@ import { RouterLink } from 'vue-router'
 }
 
 .home-card {
+  position: relative;
+  isolation: isolate;
   min-height: 190px;
   padding: 25px;
+  overflow: hidden;
   color: inherit;
   text-align: left;
   text-decoration: none;
-  border-radius: 20px;
+  border: 1px solid var(--sky-border);
+  border-radius: 28px;
+  box-shadow: var(--sky-shadow-soft);
+  backdrop-filter: var(--sky-backdrop);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+.home-card::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background:
+    radial-gradient(circle at 12% -10%, rgb(255 255 255 / 72%), transparent 38%),
+    radial-gradient(circle at 94% 118%, rgb(255 255 255 / 22%), transparent 40%);
 }
 
 .home-card:hover {
@@ -101,12 +118,12 @@ import { RouterLink } from 'vue-router'
 
 .practice-card {
   color: #163d3b;
-  background: #dff5ef;
+  background: linear-gradient(135deg, rgb(255 255 255 / 58%), rgb(240 255 252 / 26%));
 }
 
 .assignment-card {
   color: #193a58;
-  background: #ddecfa;
+  background: linear-gradient(135deg, rgb(255 255 255 / 58%), rgb(239 248 255 / 28%));
 }
 
 @media (max-width: 720px) {

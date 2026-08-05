@@ -18,8 +18,8 @@ const configStore = useConfigStore()
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
-  background: #e7f6f1;
-  border: 1px solid #abdbd0;
+  background: rgb(222 243 246 / 78%);
+  border: 1px solid rgb(255 255 255 / 72%);
   border-radius: 8px;
 }
 </style>

@@ -49,9 +49,11 @@ const { temperatureText } = useTemperature()
   padding: 20px;
   margin-bottom: 15px;
   color: #17324d;
-  background: linear-gradient(135deg, #e9f7ff, #f7fcff);
-  border: 1px solid #c9e6f7;
-  border-radius: 14px;
+  background: linear-gradient(135deg, rgb(222 243 252 / 66%), rgb(250 253 255 / 54%));
+  border: 1px solid var(--sky-border);
+  border-radius: 18px;
+  box-shadow: var(--sky-shadow-soft);
+  backdrop-filter: var(--sky-backdrop);
 }
 
 .forecast-heading {
