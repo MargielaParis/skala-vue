@@ -2,11 +2,11 @@
 
 [![GitHub Pages](https://github.com/MargielaParis/skala-vue/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/MargielaParis/skala-vue/actions/workflows/deploy-pages.yml)
 
-Vue 3 Composition API 실습을 실제 날씨 데이터와 대한민국 행정구역 지도까지 확장한 반응형 대시보드입니다.
+Vue 3, 실제 날씨 데이터와 대한민국 행정구역 지도를 활용한 반응형 날씨 대시보드입니다.
 
 **[배포 페이지 바로가기](https://margielaparis.github.io/skala-vue/#/assignment)**
 
-## 과제 요구사항 구현
+## 요구사항 구현
 
 - `ref`, `computed`, `watch`, `watchEffect` 기반 검색·선택·날씨 상태 관리
 - `v-for` 날씨 카드 렌더링 및 지역명 필터링
@@ -19,7 +19,7 @@ Vue 3 Composition API 실습을 실제 날씨 데이터와 대한민국 행정�
 - ESLint 커스텀 규칙, Prettier, staging·production 모드 빌드
 - 환경 변수로 API 키 분리 및 GitHub Pages 자동 배포
 
-## 과제 외 추가 구현
+## 추가 구현
 
 - 17개 시·도와 251개 시·군·구 GeoJSON을 이용한 SVG 행정구역 지도
 - 지역 선택 애니메이션, 마우스 오버 강조, 전국 기온 히트맵과 범례
@@ -93,20 +93,3 @@ Vite의 `VITE_*` 환경 변수는 브라우저용 번들에 포함됩니다. 공
 | `/#/weather/about`   | 서비스 소개    |
 | `/#/weather/:cityId` | 지역 상세 관측 |
 
-## 배포
-
-저장소의 `Settings → Secrets and variables → Actions`에 아래 Repository Secret을 등록합니다.
-
-```text
-VITE_OPENWEATHER_API_KEY
-```
-
-`main` 브랜치에 push하면 [배포 워크플로](.github/workflows/deploy-pages.yml)가 다음 순서로 실행됩니다.
-
-1. 의존성 재현 설치
-2. Oxlint·ESLint 정적 검사
-3. API Secret 설정 확인
-4. production 빌드
-5. GitHub Pages 아티팩트 업로드 및 배포
-
-API Secret이 비어 있으면 API가 제외된 페이지를 배포하지 않도록 빌드 작업이 중단됩니다.
